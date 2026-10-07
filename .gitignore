@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Experiment outputs: keep figures and small result tables, ignore the rest
+outputs/*
+!outputs/figures/
+!outputs/frozen_pilot_*/
+outputs/frozen_pilot_*/*
+!outputs/frozen_pilot_*/*.csv
+*.pt
+*.pkl
+*.npz

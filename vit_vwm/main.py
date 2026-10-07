@@ -46,7 +46,7 @@ def main():
     # --- Train Model ---
     model = ViT_attention_bottleneck().to(device)
     trained_model, history = train_model(
-        model, batch_size=256, steps_per_epoch=25, device=device)
+        model, total_steps=500, batch_size=256, device=device)
 
     # --- Collect Data (Simulate an experiment with 2000 trials) ---
     data = collect_model_data(trained_model, num_trials=2000, device=device)
@@ -76,23 +76,23 @@ def main():
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
 
     # --- Plot A: Learning Curve (Loss) ---
-    ax1.plot(df['epoch'], df['loss'], marker='o', color='#1f77b4', linewidth=2, label='Training Loss')
+    ax1.plot(df['step'], df['loss'], marker='o', color='#1f77b4', linewidth=2, label='Training Loss')
     ax1.set_title('Learning Curve', fontsize=14, fontweight='bold')
-    ax1.set_xlabel('Epoch', fontsize=12)
+    ax1.set_xlabel('Step', fontsize=12)
     ax1.set_ylabel('Cosine Loss', fontsize=12)
     ax1.grid(True, linestyle='--', alpha=0.6)
     ax1.legend()
 
     # --- Plot B: Performance (Angular Error) ---
-    ax2.plot(df['epoch'], df['mixed_err'], marker='s', color='#d62728', linewidth=2, label='Mixed Set Size (Hard)')
-    ax2.plot(df['epoch'], df['ss1_err'], marker='^', color='#2ca02c', linewidth=2, label='Set Size 1 (Easy)')
+    ax2.plot(df['step'], df['err_mix'], marker='s', color='#d62728', linewidth=2, label='Mixed Set Size (Hard)')
+    ax2.plot(df['step'], df['err_ss1'], marker='^', color='#2ca02c', linewidth=2, label='Set Size 1 (Easy)')
 
     # Add reference lines
     ax2.axhline(y=90, color='gray', linestyle=':', label='Chance Level (90°)')
     ax2.axhline(y=15, color='gold', linestyle='--', label='Human Precision (15°)')
 
     ax2.set_title('Validation Error', fontsize=14, fontweight='bold')
-    ax2.set_xlabel('Epoch', fontsize=12)
+    ax2.set_xlabel('Step', fontsize=12)
     ax2.set_ylabel('Mean Absolute Error (°)', fontsize=12)
     ax2.grid(True, linestyle='--', alpha=0.6)
     ax2.legend()

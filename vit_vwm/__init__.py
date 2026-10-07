@@ -62,6 +62,8 @@ from .analysis import (
     mixture_nll,
     kappa_to_sd_deg,
     get_zhang_luck_params,
+    swap_mixture_nll,
+    get_swap_params,
 )
 
 from .visualization import (
@@ -117,6 +119,8 @@ __all__ = [
     "mixture_nll",
     "kappa_to_sd_deg",
     "get_zhang_luck_params",
+    "swap_mixture_nll",
+    "get_swap_params",
     # visualization
     "unnormalize",
     "plot_mixture_distributions",
